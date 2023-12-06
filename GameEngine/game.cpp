@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Font.h"
 #include "Sprite.h"
 #include "Window.h"
 
@@ -12,7 +13,8 @@
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 
-const char* pikachuImagePath{ "img/pikachu.png" };
+const char* pikachuImagePath {"img/pikachu.png"};
+const char* fontFilePath {"font/lazy.ttf"}; 
 
 int main(int argc, char* args[])
 {
@@ -28,13 +30,7 @@ int main(int argc, char* args[])
 
 	Sprite pikachu {window.renderer, pikachuImagePath};
 
-	// load font
-	auto font = TTF_OpenFont("font/lazy.ttf", 100);
-	if (font == NULL)
-	{
-		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
-		return -1;
-	}
+	Font font {fontFilePath};
 
 	// create text from font
 	SDL_Color textColor = { 0xff, 0xff, 0xff };
@@ -42,7 +38,7 @@ int main(int argc, char* args[])
 	SDL_Texture* textTexture; // The final optimized image
 
 	// render the text into an unoptimized CPU surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(font, "The lazy fox, blah blah", textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Solid(font.font, "The lazy fox, blah blah", textColor);
 	int textWidth, textHeight;
 	if (textSurface == NULL)
 	{
@@ -130,7 +126,7 @@ int main(int argc, char* args[])
 			pik_w,
 			pik_h
 		};
-		SDL_RenderCopy(window.renderer, pikachu, NULL, &targetRectangle);
+		SDL_RenderCopy(window.renderer, pikachu.sprite, NULL, &targetRectangle);
 
 		// render the text
 		targetRectangle = SDL_Rect{
