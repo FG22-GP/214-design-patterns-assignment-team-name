@@ -4,10 +4,12 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-Text::Text(const char* textString, SDL_Renderer* renderer, TTF_Font* font, SDL_Color color)
+Text::Text(const char* textString, SDL_Renderer* renderer, const char* fontFilePath, SDL_Color color)
 {
+    Font font {fontFilePath};
+    
     // render the text into an unoptimized CPU surface
-    SDL_Surface* textSurface = TTF_RenderText_Solid(font, textString, color);
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font.font, textString, color);
 
     if (textSurface == NULL)
     {

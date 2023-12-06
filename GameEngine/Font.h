@@ -4,7 +4,7 @@
 class Font
 {
 public:
-    Font(const char* FontFilePath);
+    Font(const char* fontFilePath);
 
     TTF_Font* font;
 };

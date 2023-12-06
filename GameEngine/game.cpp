@@ -12,26 +12,39 @@ const int SCREEN_HEIGHT = 768;
 
 //File path constants
 const char* pikachuImagePath {"img/pikachu.png"};
-const char* fontFilePath {"font/lazy.ttf"}; 
+const char* fontFilePath {"font/lazy.ttf"};
+
+//Window
+Window window {SCREEN_WIDTH, SCREEN_HEIGHT};
+
+//Sprites (GameObjects)
+Sprite pikachu {window.renderer, pikachuImagePath};
+
+//Functions
+void RenderTexture(SDL_Texture* texture, int PosX, int PosY, int SizeX, int SizeY)
+{
+	SDL_Rect targetRectangle = SDL_Rect{
+		PosX,
+		PosY,
+		SizeX,
+		SizeY
+	};
+	SDL_RenderCopy(window.renderer, texture, NULL, &targetRectangle);
+}
 
 int main(int argc, char* args[])
 {
-	Window window {SCREEN_WIDTH, SCREEN_HEIGHT};
-	
 	// All data related to pikachu
 	bool pikachuMoveRight = false;
 	int pik_x, pik_y;
 	pik_x = pik_y = 0;
 	int pik_w, pik_h;
 	pik_w = pik_h = 200;
-
-	Sprite pikachu {window.renderer, pikachuImagePath};
-
-	//Text
-	Font font {fontFilePath};
+	
+	// create text
 	SDL_Color textColor = { 0xff, 0xff, 0xff };
-	const char* textString = "This is text";
-	Text text {textString, window.renderer, font.font, textColor};
+	const char* textString = "This is a piece of text";
+	Text text {textString, window.renderer, fontFilePath, textColor};
 
 	SDL_Event e; bool quit = false;
 
@@ -90,22 +103,10 @@ int main(int argc, char* args[])
 		SDL_RenderClear(window.renderer);
 		
 		// render Pikachu
-		SDL_Rect targetRectangle{
-			pik_x,
-			pik_y,
-			pik_w,
-			pik_h
-		};
-		SDL_RenderCopy(window.renderer, pikachu.sprite, NULL, &targetRectangle);
+		RenderTexture(pikachu.sprite, pik_x, pik_y, pik_w, pik_h);
 
 		// render the text
-		targetRectangle = SDL_Rect{
-			500,
-			500,
-			text.textWidth,
-			text.textHeight
-		};
-		SDL_RenderCopy(window.renderer, text.textTexture, NULL, &targetRectangle);
+		RenderTexture(text.textTexture, 500, 500, text.textWidth, text.textHeight);
 
 		// present screen (switch buffers)
 		SDL_RenderPresent(window.renderer);
@@ -115,3 +116,4 @@ int main(int argc, char* args[])
 
 	return 0;
 }
+
