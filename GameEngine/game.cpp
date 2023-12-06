@@ -4,6 +4,8 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Window.h"
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1024;
@@ -13,43 +15,8 @@ const char* pikachuImagePath{ "img/pikachu.png" };
 
 int main(int argc, char* args[])
 {
-
-	//The window we'll be rendering to
-	SDL_Window* window{};
-	SDL_Renderer* renderer; // the window's rendering surface
-
-	// initialize SDL_Image for image loading
-	int imgFlags = IMG_INIT_PNG;
-	if (!(IMG_Init(imgFlags) & imgFlags))
-	{
-		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
-	}
-
-	// initialize SDL_ttf for font loading
-	if (TTF_Init() == -1)
-	{
-		printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
-	}
-
-	//Start up SDL and create window
-	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO))
-	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-		return -1;
-	}
-
-	// Create Window and Renderer
-	SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, &window, &renderer);
-	if (!window)
-	{
-		printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		return -1;
-	}
-
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");  // make the scaled rendering look smoother.
-	SDL_RenderSetLogicalSize(renderer, 1024, 768);
-
+	Window window {SCREEN_WIDTH, SCREEN_HEIGHT};
+	
 	// All data related to pikachu
 	SDL_Texture* pikachu = NULL; // The final optimized image
 	bool pikachuMoveRight = false;
@@ -68,7 +35,7 @@ int main(int argc, char* args[])
 	else
 	{
 		//Convert surface to screen format
-		pikachu = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+		pikachu = SDL_CreateTextureFromSurface(window.renderer, loadedSurface);
 		if (pikachu == NULL)
 		{
 			printf("Unable to create texture from %s! SDL Error: %s\n", pikachuImagePath, SDL_GetError());
@@ -103,7 +70,7 @@ int main(int argc, char* args[])
 	else
 	{
 		// Create texture GPU-stored texture from surface pixels
-		textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+		textTexture = SDL_CreateTextureFromSurface(window.renderer, textSurface);
 		if (textTexture == NULL)
 		{
 			printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
@@ -171,8 +138,8 @@ int main(int argc, char* args[])
 		}
 		
 		// clear the screen
-		SDL_SetRenderDrawColor(renderer, 120, 60, 255, 255);
-		SDL_RenderClear(renderer);
+		SDL_SetRenderDrawColor(window.renderer, 120, 60, 255, 255);
+		SDL_RenderClear(window.renderer);
 		
 		// render Pikachu
 		SDL_Rect targetRectangle{
@@ -181,7 +148,7 @@ int main(int argc, char* args[])
 			pik_w,
 			pik_h
 		};
-		SDL_RenderCopy(renderer, pikachu, NULL, &targetRectangle);
+		SDL_RenderCopy(window.renderer, pikachu, NULL, &targetRectangle);
 
 		// render the text
 		targetRectangle = SDL_Rect{
@@ -190,10 +157,10 @@ int main(int argc, char* args[])
 			textWidth,
 			textHeight
 		};
-		SDL_RenderCopy(renderer, textTexture, NULL, &targetRectangle);
+		SDL_RenderCopy(window.renderer, textTexture, NULL, &targetRectangle);
 
 		// present screen (switch buffers)
-		SDL_RenderPresent(renderer);
+		SDL_RenderPresent(window.renderer);
 
 		SDL_Delay(10); // can be used to wait for a certain amount of ms
 	}
