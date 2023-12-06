@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
+#include "Sprite.h"
 #include "Window.h"
 
 
@@ -18,33 +19,14 @@ int main(int argc, char* args[])
 	Window window {SCREEN_WIDTH, SCREEN_HEIGHT};
 	
 	// All data related to pikachu
-	SDL_Texture* pikachu = NULL; // The final optimized image
+	
 	bool pikachuMoveRight = false;
 	int pik_x, pik_y;
 	pik_x = pik_y = 0;
 	int pik_w, pik_h;
 	pik_w = pik_h = 200;
 
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load(pikachuImagePath);
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", pikachuImagePath, IMG_GetError());
-		return -1;
-	}
-	else
-	{
-		//Convert surface to screen format
-		pikachu = SDL_CreateTextureFromSurface(window.renderer, loadedSurface);
-		if (pikachu == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", pikachuImagePath, SDL_GetError());
-			return -1;
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
-	}
+	Sprite pikachu {window.renderer, pikachuImagePath};
 
 	// load font
 	auto font = TTF_OpenFont("font/lazy.ttf", 100);
