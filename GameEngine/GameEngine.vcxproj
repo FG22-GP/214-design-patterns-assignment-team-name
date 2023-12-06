@@ -30,6 +30,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +46,7 @@
   <ItemGroup>
     <ClInclude Include="Font.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

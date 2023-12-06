@@ -1,11 +1,8 @@
-//Using SDL and standard IO
 #include <SDL.h>
-#include <stdio.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
 
 #include "Font.h"
 #include "Sprite.h"
+#include "Text.h"
 #include "Window.h"
 
 
@@ -13,6 +10,7 @@
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 
+//File path constants
 const char* pikachuImagePath {"img/pikachu.png"};
 const char* fontFilePath {"font/lazy.ttf"}; 
 
@@ -21,7 +19,6 @@ int main(int argc, char* args[])
 	Window window {SCREEN_WIDTH, SCREEN_HEIGHT};
 	
 	// All data related to pikachu
-	
 	bool pikachuMoveRight = false;
 	int pik_x, pik_y;
 	pik_x = pik_y = 0;
@@ -30,38 +27,11 @@ int main(int argc, char* args[])
 
 	Sprite pikachu {window.renderer, pikachuImagePath};
 
+	//Text
 	Font font {fontFilePath};
-
-	// create text from font
 	SDL_Color textColor = { 0xff, 0xff, 0xff };
-	//Render text surface
-	SDL_Texture* textTexture; // The final optimized image
-
-	// render the text into an unoptimized CPU surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(font.font, "The lazy fox, blah blah", textColor);
-	int textWidth, textHeight;
-	if (textSurface == NULL)
-	{
-		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-		return -1;
-	}
-	else
-	{
-		// Create texture GPU-stored texture from surface pixels
-		textTexture = SDL_CreateTextureFromSurface(window.renderer, textSurface);
-		if (textTexture == NULL)
-		{
-			printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
-			return -1;
-		}
-		// Get image dimensions
-		auto width = textSurface->w;
-		auto height = textSurface->h;
-		textWidth = textSurface->w;
-		textHeight = textSurface->h;
-		//Get rid of old loaded surface
-		SDL_FreeSurface(textSurface);
-	}
+	const char* textString = "This is text";
+	Text text {textString, window.renderer, font.font, textColor};
 
 	SDL_Event e; bool quit = false;
 
@@ -132,10 +102,10 @@ int main(int argc, char* args[])
 		targetRectangle = SDL_Rect{
 			500,
 			500,
-			textWidth,
-			textHeight
+			text.textWidth,
+			text.textHeight
 		};
-		SDL_RenderCopy(window.renderer, textTexture, NULL, &targetRectangle);
+		SDL_RenderCopy(window.renderer, text.textTexture, NULL, &targetRectangle);
 
 		// present screen (switch buffers)
 		SDL_RenderPresent(window.renderer);
