@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -45,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Font.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
