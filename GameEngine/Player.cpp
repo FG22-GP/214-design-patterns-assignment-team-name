@@ -15,9 +15,9 @@ Vector2 Player::GetPlayerPosition()
     return PlayerPosition;
 }
 
-void Player::SetPlayerPosition(Vector2 movement)
+void Player::SetPlayerPosition(Vector2 newPosition)
 {
-    PlayerPosition += movement;
+    PlayerPosition += newPosition;
 }
 
 void Player::SetGrounded(bool grounding)
