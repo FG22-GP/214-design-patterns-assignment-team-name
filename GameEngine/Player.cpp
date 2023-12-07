@@ -18,3 +18,13 @@ void Player::SetGrounded(bool grounding)
 {
     isGrounded = grounding;
 }
+
+Vector2 Player::GetPlayerPosition()
+{
+    return PlayerPosition;
+}
+
+void Player::UpdatePlayerPosition(Vector2 movement)
+{
+    PlayerPosition += movement;
+}
