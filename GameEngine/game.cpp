@@ -1,9 +1,12 @@
 #include <SDL.h>
+#include <string>
 
 #include "Font.h"
 #include "Sprite.h"
 #include "Text.h"
 #include "Window.h"
+#include "Engine.h"
+#include "Vector2.h"
 
 
 //Screen dimension constants
@@ -11,40 +14,23 @@ const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 
 //File path constants
-const char* pikachuImagePath {"img/pikachu.png"};
-const char* fontFilePath {"font/lazy.ttf"};
-
-//Window
-Window window {SCREEN_WIDTH, SCREEN_HEIGHT};
-
-//Sprites (GameObjects)
-Sprite pikachu {window.renderer, pikachuImagePath};
-
-//Functions
-void RenderTexture(SDL_Texture* texture, int PosX, int PosY, int SizeX, int SizeY)
-{
-	SDL_Rect targetRectangle = SDL_Rect{
-		PosX,
-		PosY,
-		SizeX,
-		SizeY
-	};
-	SDL_RenderCopy(window.renderer, texture, NULL, &targetRectangle);
-}
+std::string pikachuImagePath {"img/pikachu.png"};
+std::string fontFilePath {"font/lazy.ttf"};
 
 int main(int argc, char* args[])
 {
+	Engine* engine = Engine::GetInstance();
+	engine->Setup(SCREEN_WIDTH, SCREEN_WIDTH);
+
+	Sprite* pikachu = engine->GetSprite(pikachuImagePath, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
+
 	// All data related to pikachu
 	bool pikachuMoveRight = false;
-	int pik_x, pik_y;
-	pik_x = pik_y = 0;
-	int pik_w, pik_h;
-	pik_w = pik_h = 200;
-	
+
 	// create text
-	SDL_Color textColor = { 0xff, 0xff, 0xff };
-	const char* textString = "This is a piece of text";
-	Text text {textString, window.renderer, fontFilePath, textColor};
+	//SDL_Color textColor = { 0xff, 0xff, 0xff };
+	//const char* textString = "This is a piece of text";
+	//Text text {textString, window.renderer, fontFilePath, textColor};
 
 	SDL_Event e; bool quit = false;
 
@@ -81,35 +67,36 @@ int main(int argc, char* args[])
 		const Uint8* keystate = SDL_GetKeyboardState(NULL);
 		if (keystate[SDL_SCANCODE_UP])
 		{
-			pik_y--;
+			pikachu->position.y -= 1.0;
 		}
 		if (keystate[SDL_SCANCODE_DOWN])
 		{
-			pik_y++;
+			pikachu->position.y += 1.0;
 		}
 
 		// our current game logic :)
 		if (pikachuMoveRight) {
-			pik_x++;
-			if (pik_x > 599) pikachuMoveRight = false;
+			pikachu->position.x += 1.0;
+
+			if (pikachu->position.x > 599) pikachuMoveRight = false;
 		}
 		else {
-			pik_x--;
-			if (pik_x < 1) pikachuMoveRight = true;
+			pikachu->position.x -= 1.0;
+
+			if (pikachu->position.x < 1) pikachuMoveRight = true;
 		}
-		
-		// clear the screen
-		SDL_SetRenderDrawColor(window.renderer, 120, 60, 255, 255);
-		SDL_RenderClear(window.renderer);
-		
+				
+		engine->Clear();
+
+		engine->RenderSprite(pikachu);
+
 		// render Pikachu
-		RenderTexture(pikachu.sprite, pik_x, pik_y, pik_w, pik_h);
+		//RenderTexture(pikachu.sprite, pik_x, pik_y, pik_w, pik_h);
 
 		// render the text
-		RenderTexture(text.textTexture, 500, 500, text.textWidth, text.textHeight);
+		//RenderTexture(text.textTexture, 500, 500, text.textWidth, text.textHeight);
 
-		// present screen (switch buffers)
-		SDL_RenderPresent(window.renderer);
+		engine->Present();
 
 		SDL_Delay(10); // can be used to wait for a certain amount of ms
 	}

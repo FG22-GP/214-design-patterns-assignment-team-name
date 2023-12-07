@@ -1,10 +1,16 @@
 ﻿#pragma once
-#include <SDL_render.h>
+#include "Vector2.h"
+#include "Texture.h"
 
 class Sprite
 {
 public:
-    Sprite(SDL_Renderer* renderer, const char* SpriteFilePath);
+    Sprite();
 
-    SDL_Texture* sprite = NULL;
+    void Reset();
+
+    Texture* texture;
+    Vector2 position;
+    Vector2 size;
+    bool isCollider;
 };

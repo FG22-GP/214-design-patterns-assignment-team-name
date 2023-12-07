@@ -41,3 +41,8 @@ Window::Window(int ScreenWidth, int ScreenHeight)
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");  // make the scaled rendering look smoother.
     SDL_RenderSetLogicalSize(renderer, 1024, 768);
 }
+
+void Window::Clear(Uint8 r, Uint8 g, Uint8 b) {
+    SDL_SetRenderDrawColor(renderer, r, g, b, 255);
+    SDL_RenderClear(renderer);
+}
