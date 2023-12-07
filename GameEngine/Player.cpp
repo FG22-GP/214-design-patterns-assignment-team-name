@@ -1,8 +1,28 @@
 ﻿#include "Player.h"
 
-void Player::Move(float input)
+void Player::SetMovementDirection(Vector2 dir)
 {
-    MovementDirection.x = input * movementSpeed;
+    MovementDirection = dir;
+}
+
+Vector2 Player::GetMovementDirection()
+{
+    return MovementDirection;
+}
+
+Vector2 Player::GetPlayerPosition()
+{
+    return PlayerPosition;
+}
+
+void Player::SetPlayerPosition(Vector2 movement)
+{
+    PlayerPosition += movement;
+}
+
+void Player::SetGrounded(bool grounding)
+{
+    isGrounded = grounding;
 }
 
 void Player::Jump()
@@ -14,17 +34,7 @@ void Player::Jump()
     }
 }
 
-void Player::SetGrounded(bool grounding)
+void Player::PlayerMovement(float input)
 {
-    isGrounded = grounding;
-}
-
-Vector2 Player::GetPlayerPosition()
-{
-    return PlayerPosition;
-}
-
-void Player::UpdatePlayerPosition(Vector2 movement)
-{
-    PlayerPosition += movement;
+    SetMovementDirection(Vector2(input*movementSpeed, 0));
 }

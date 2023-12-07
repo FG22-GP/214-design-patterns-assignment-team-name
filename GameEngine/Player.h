@@ -1,23 +1,26 @@
 ﻿#pragma once
+#include <set>
+
 #include "Vector2.h"
 
 class Player
 {
-public:
-    Vector2 MovementDirection;
-    Vector2 PlayerPosition;
-    
-private:
     float jumpSpeed;
     float movementSpeed;
 
     bool isGrounded;
     
+    Vector2 MovementDirection;
+    Vector2 PlayerPosition;
+    
 public:
-    void Move(float input);
-    void Jump();
-    void SetGrounded(bool grounding);
+    void SetMovementDirection(Vector2 dir);
+    Vector2 GetMovementDirection();
     
     Vector2 GetPlayerPosition();
-    void UpdatePlayerPosition(Vector2 movement);
+    void SetPlayerPosition(Vector2 movement);
+    
+    void Jump();
+    void PlayerMovement(float input);
+    void SetGrounded(bool grounding);
 };
