@@ -5,10 +5,19 @@
 
 class Player
 {
-    float jumpSpeed;
-    float movementSpeed;
+#pragma region "Singleton logic"
+    Player(){}
+public:
+    static Player& getInstance(){ static Player instance; return instance;}
+    Player(Player const&) = delete;
+    void operator=(Player const&) = delete;
+#pragma endregion
+    
+private:
+    float jumpSpeed = 5.0f;
+    float movementSpeed = 5.0f;
 
-    bool isGrounded;
+    bool isGrounded = false;
     
     Vector2 MovementDirection;
     Vector2 PlayerPosition;
