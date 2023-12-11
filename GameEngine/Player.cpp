@@ -23,6 +23,10 @@ void Player::SetPlayerPosition(Vector2 newPosition)
 void Player::SetGrounded(bool grounding)
 {
     isGrounded = grounding;
+    if(grounding)
+    {
+        YForce = 0.f;
+    }
 }
 
 void Player::Jump()
@@ -41,6 +45,11 @@ void Player::PlayerMovement(float input)
 
 void Player::Tick(float deltaTime)
 {
+    if(!engine)
+    {
+        engine = Engine::GetInstance();
+    }
+    
     //Resolve forces
     if(!isGrounded)
     {
@@ -58,4 +67,6 @@ void Player::Tick(float deltaTime)
     {
         SetGrounded(true);
     }
+
+    
 }
