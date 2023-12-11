@@ -17,7 +17,7 @@ Vector2 Player::GetPlayerPosition()
 
 void Player::SetPlayerPosition(Vector2 newPosition)
 {
-    PlayerPosition += newPosition;
+    PlayerPosition = newPosition;
 }
 
 void Player::SetGrounded(bool grounding)
@@ -29,7 +29,7 @@ void Player::Jump()
 {
     if(isGrounded)
     {
-        MovementDirection.y = jumpSpeed;
+        YForce = -jumpSpeed;
         SetGrounded(false);
     }
 }
@@ -37,4 +37,25 @@ void Player::Jump()
 void Player::PlayerMovement(float input)
 {
     SetMovementDirection(Vector2(input*movementSpeed, 0));
+}
+
+void Player::Tick(float deltaTime)
+{
+    //Resolve forces
+    if(!isGrounded)
+    {
+        YForce -= Gravity;
+    }else
+    {
+        YForce = 0.f;
+    }
+
+    //Move player
+    SetPlayerPosition(GetPlayerPosition() + GetMovementDirection()  * deltaTime + Vector2(0,YForce));
+
+    //TODO replace this with actual collision with ground
+    if(GetPlayerPosition().y > 500.f)
+    {
+        SetGrounded(true);
+    }
 }

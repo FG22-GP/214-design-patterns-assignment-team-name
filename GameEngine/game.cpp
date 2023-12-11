@@ -6,8 +6,8 @@
 #include "Text.h"
 #include "Window.h"
 #include "Engine.h"
+#include "Player.h"
 #include "Vector2.h"
-
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1024;
@@ -17,85 +17,68 @@ const int SCREEN_HEIGHT = 768;
 std::string pikachuImagePath {"img/pikachu.png"};
 std::string fontFilePath {"font/lazy.ttf"};
 
+float LastFrameTime = 0.f;
+float CurrentFrameTime = 0.f;
+float GetDeltaTime()
+{
+	return CurrentFrameTime - LastFrameTime;
+}
+
 int main(int argc, char* args[])
 {
 	Engine* engine = Engine::GetInstance();
 	engine->Setup(SCREEN_WIDTH, SCREEN_WIDTH);
 
 	Sprite* pikachu = engine->GetSprite(pikachuImagePath, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
-
-	// All data related to pikachu
-	bool pikachuMoveRight = false;
+	
 
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
 	//const char* textString = "This is a piece of text";
 	//Text text {textString, window.renderer, fontFilePath, textColor};
 
-	SDL_Event e; bool quit = false;
+	SDL_Event e;
+	bool quit = false;
 
 	// while the user doesn't want to quit
 	while (quit == false)
 	{
-		SDL_GetTicks(); // can be used, to see, how much time in ms has passed since app start
+		//Update delta time values
+		LastFrameTime = CurrentFrameTime;
+		CurrentFrameTime = (float)SDL_GetTicks() / 1000.f;
 
+		Player::getInstance().PlayerMovement(0);
 
 		// loop through all pending events from Windows (OS)
 		while (SDL_PollEvent(&e))
 		{
-			// check, if it's an event we want to react to:
-			switch (e.type) {
-				case SDL_QUIT: {
-					quit = true;
-				} break;
-
-					// This is an example on how to use input events:
-				case SDL_KEYDOWN: {
-					// input example: if left, then make pikachu move left
-					if (e.key.keysym.sym == SDLK_LEFT) {
-						pikachuMoveRight = false;
-					}
-					// if right, then make pikachu move right
-					if (e.key.keysym.sym == SDLK_RIGHT) {
-						pikachuMoveRight = true;
-					}
-				} break;
-			} 
+			if(e.type == SDL_QUIT)
+			{
+				quit = true;
+			}
 		}
 
-		// This is an example for how to check, whether keys are currently pressed:
+		// Input (should be moved to its own class)
 		const Uint8* keystate = SDL_GetKeyboardState(NULL);
-		if (keystate[SDL_SCANCODE_UP])
+		if (keystate[SDL_SCANCODE_A])
 		{
-			pikachu->position.y -= 1.0;
+			Player::getInstance().PlayerMovement(-1);
 		}
-		if (keystate[SDL_SCANCODE_DOWN])
+		if (keystate[SDL_SCANCODE_D])
 		{
-			pikachu->position.y += 1.0;
+			Player::getInstance().PlayerMovement(1);
+		}
+		if(keystate[SDL_SCANCODE_SPACE] || keystate[SDL_SCANCODE_W])
+		{
+			Player::getInstance().Jump();
 		}
 
-		// our current game logic :)
-		if (pikachuMoveRight) {
-			pikachu->position.x += 1.0;
-
-			if (pikachu->position.x > 599) pikachuMoveRight = false;
-		}
-		else {
-			pikachu->position.x -= 1.0;
-
-			if (pikachu->position.x < 1) pikachuMoveRight = true;
-		}
+		//Move player sprite to player location and tick player
+		pikachu->position = Player::getInstance().GetPlayerPosition();
+		Player::getInstance().Tick(GetDeltaTime());
 				
 		engine->Clear();
-
 		engine->RenderSprite(pikachu);
-
-		// render Pikachu
-		//RenderTexture(pikachu.sprite, pik_x, pik_y, pik_w, pik_h);
-
-		// render the text
-		//RenderTexture(text.textTexture, 500, 500, text.textWidth, text.textHeight);
-
 		engine->Present();
 
 		SDL_Delay(10); // can be used to wait for a certain amount of ms
