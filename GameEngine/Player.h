@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include <set>
 
+#include "GameObject.h"
 #include "Vector2.h"
 
-class Player
+class Player : public GameObject
 {
 #pragma region "Singleton logic"
     Player(){}
@@ -36,5 +37,5 @@ public:
     void PlayerMovement(float input);
     void SetGrounded(bool grounding);
 
-    void Tick(float deltaTime);
+    void Tick(float deltaTime) override;
 };
