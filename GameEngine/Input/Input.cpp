@@ -1,5 +1,15 @@
 ﻿#include "Input.h"
+
+#include <SDL_events.h>
 #include <SDL_keyboard.h>
+
+Input::Input()
+{
+    MoveLeftAction = &moveLeft;
+    MoveRightAction = &moveRight;
+    JumpAction = &jump;
+    QuitAction = &quitting;
+}
 
 void Input::GetInput()
 {

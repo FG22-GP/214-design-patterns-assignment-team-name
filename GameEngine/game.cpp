@@ -36,15 +36,7 @@ int main(int argc, char* args[])
 	
 	//Input setup
 	Input input = Input{};
-	MoveLeftCommand moveLeft = MoveLeftCommand{};
-	MoveRightCommand moveRight = MoveRightCommand{};
-	JumpCommand jump = JumpCommand{};
-	QuitCommand quitting = QuitCommand{};
-	input.MoveLeftAction = &moveLeft;
-	input.MoveRightAction = &moveRight;
-	input.JumpAction = &jump;
-	input.QuitAction = &quitting;
-
+	
 	//Collision setup
 	PlatformHandler platformHandler;
 	platformHandler.Setup();
@@ -68,12 +60,15 @@ int main(int argc, char* args[])
 
 		player.PlayerMovement(0);
 
-		//Quit input
+		//X button on window
 		while (SDL_PollEvent(&e))
 		{
-			if(e.type == SDL_QUIT)
+			if(e.type == SDL_KEYDOWN)
 			{
-				Engine::GetInstance()->quit = true;
+				if (e.key.keysym.sym == SDLK_ESCAPE)
+				{
+					Engine::GetInstance()->quit = true;
+				}
 			}
 		}
 
@@ -102,6 +97,7 @@ int main(int argc, char* args[])
 		engine->Present();
 #pragma endregion
 
+		//TODO update loop pattern
 		SDL_Delay(10);
 	}
 
