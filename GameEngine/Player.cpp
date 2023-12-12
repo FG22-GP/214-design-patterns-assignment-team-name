@@ -45,11 +45,6 @@ void Player::PlayerMovement(float input)
 
 void Player::Tick(float deltaTime)
 {
-    if(!engine)
-    {
-        engine = Engine::GetInstance();
-    }
-    
     //Resolve forces
     if(!isGrounded)
     {
@@ -67,6 +62,4 @@ void Player::Tick(float deltaTime)
     {
         SetGrounded(true);
     }
-
-    
 }

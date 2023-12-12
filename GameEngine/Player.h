@@ -23,11 +23,8 @@ private:
     
     Vector2 MovementDirection;
     Vector2 PlayerPosition;
-
-
+    
     float Gravity = -0.1f;
-
-    Engine* engine;
     
 public:
     Sprite* PlayerSprite;
