@@ -1,15 +1,22 @@
 #pragma once
-#include <string>
-
-#include "Vector2.h"
+#include "Engine.h"
+#include "Sprite.h"
 
 class WinPoint
 {
-    Vector2 WinPointSize{100, 600};
-    std::string WinPointSprite;
+    bool winBoolean = false;
+
 public:
-    std::string GetVictoryPointSprite() { return WinPointSprite; }
-    Vector2 GetWinPoint() { return WinPointSize; }
-    
-    void Win();;
+    Sprite* winPointSprite;
+
+    [[nodiscard]] bool GetWinBoolean() const
+    {
+        return winBoolean;
+    }
+
+    void SetWinBoolean(bool win_boolean)
+    {
+        winBoolean = win_boolean;
+    }
+    void Win();
 };

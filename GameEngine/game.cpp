@@ -54,6 +54,7 @@ int main(int argc, char* args[])
 	Camera camera = Camera{};
 
 	WinPoint winPoint;
+	winPoint.winPointSprite = engine->GetSprite(Constants::PLAYERSPRITEFILEPATH, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
 	//const char* textString = "This is a piece of text";
@@ -100,7 +101,8 @@ int main(int argc, char* args[])
 			engine->RenderSprite(platform, camera.GetRelativeLocation(platform->position));
 		}
 		engine->RenderSprite(player.PlayerSprite, camera.GetRelativeLocation(player.GetPlayerPosition()));
-		winPoint.Win();
+		engine->RenderSprite(winPoint.winPointSprite, camera.GetRelativeLocation(winPoint.winPointSprite->position));
+		
 		engine->Present();
 #pragma endregion
 
