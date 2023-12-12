@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include "Engine.h"
 #include "Vector2.h"
+#include "Animation/Animator.h"
 
 class Player
 {
 #pragma region "Singleton logic"
-    Player(){}
+    Player(){};
 public:
     static Player& getInstance(){ static Player instance; return instance;}
     Player(Player const&) = delete;
@@ -23,6 +23,8 @@ private:
     Vector2 PlayerPosition;
     
     float Gravity = -0.1f;
+
+    Animator animator;
     
 public:
     Sprite* PlayerSprite;
@@ -41,5 +43,6 @@ public:
     void PlayerMovement(float input);
     void SetGrounded(bool grounding);
 
+    void Setup();
     void Tick(float deltaTime);
 };

@@ -33,7 +33,7 @@ int main(int argc, char* args[])
 
 	//Player setup
 	Player& player = Player::getInstance();
-	player.PlayerSprite = engine->GetSprite(Constants::PLAYERSPRITEFILEPATH, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
+	player.Setup();
 	
 	//Input setup
 	Input input = Input{};
@@ -48,7 +48,6 @@ int main(int argc, char* args[])
 
 	//Collision setup
 	PlatformHandler platformHandler;
-	//platformHandler.Setup();
 
 	//Camera setup
 	Camera camera = Camera{};

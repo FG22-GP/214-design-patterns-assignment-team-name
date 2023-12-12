@@ -1,4 +1,6 @@
 ﻿#include "PlatformHandler.h"
+#include "Constants.h"
+#include "Engine.h"
 #include "HelperFunctions.h"
 #include "Sprite.h"
 
@@ -7,7 +9,7 @@ PlatformHandler::PlatformHandler()
     Engine* engine = Engine::GetInstance();
     for (int i = 0; i < PlatformAmount; i++)
     {
-        platforms[i] = engine->GetSprite("img/Wall.png", platformLocations[i], Vector2 {300, 100}, false);
+        platforms[i] = engine->GetSprite(Constants::WALLSPRITEFILEPATH, platformLocations[i], Vector2 {300, 100}, false);
     }
 }
 
