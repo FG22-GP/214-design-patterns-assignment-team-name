@@ -19,6 +19,7 @@ protected:
 	Window* window = nullptr;
 
 public:
+	bool quit = false;
 	Engine(Engine& other) = delete;
 	void operator=(const Engine&) = delete;
 

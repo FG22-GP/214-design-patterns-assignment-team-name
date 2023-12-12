@@ -15,6 +15,7 @@
 #include "Input/JumpCommand.h"
 #include "Input/MoveLeftCommand.h"
 #include "Input/MoveRightCommand.h"
+#include "Input/QuitCommand.h"
 
 //Delta time
 float LastFrameTime = 0.f;
@@ -38,6 +39,7 @@ int main(int argc, char* args[])
 	MoveLeftCommand moveLeft = MoveLeftCommand{};
 	MoveRightCommand moveRight = MoveRightCommand{};
 	JumpCommand jump = JumpCommand{};
+	QuitCommand quitting = QuitCommand{};
 	input.MoveLeftAction = &moveLeft;
 	input.MoveRightAction = &moveRight;
 	input.JumpAction = &jump;
@@ -55,10 +57,9 @@ int main(int argc, char* args[])
 	//Text text {textString, window.renderer, fontFilePath, textColor};
 
 	SDL_Event e;
-	bool quit = false;
 
 	// while the user doesn't want to quit
-	while (quit == false)
+	while (Engine::GetInstance()->quit == false)
 	{
 		//Update delta time values
 		LastFrameTime = CurrentFrameTime;
@@ -71,7 +72,7 @@ int main(int argc, char* args[])
 		{
 			if(e.type == SDL_QUIT)
 			{
-				quit = true;
+				Engine::GetInstance()->quit = true;
 			}
 		}
 

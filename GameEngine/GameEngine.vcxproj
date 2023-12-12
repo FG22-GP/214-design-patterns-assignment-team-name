@@ -112,6 +112,7 @@
     <ClCompile Include="Input\JumpCommand.cpp" />
     <ClCompile Include="Input\MoveLeftCommand.cpp" />
     <ClCompile Include="Input\MoveRightCommand.cpp" />
+    <ClCompile Include="Input\QuitCommand.cpp" />
     <ClCompile Include="PlatformHandler.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Input\JumpCommand.h" />
     <ClInclude Include="Input\MoveLeftCommand.h" />
     <ClInclude Include="Input\MoveRightCommand.h" />
+    <ClInclude Include="Input\QuitCommand.h" />
     <ClInclude Include="PlatformHandler.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Sprite.h" />

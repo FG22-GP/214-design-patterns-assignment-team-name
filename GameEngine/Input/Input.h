@@ -7,6 +7,7 @@ public:
     Command* MoveLeftAction;
     Command* MoveRightAction;
     Command* JumpAction;
+    Command* QuitAction;
 
     void GetInput();
 };

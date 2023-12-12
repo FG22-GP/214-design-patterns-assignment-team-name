@@ -16,4 +16,8 @@ void Input::GetInput()
     {
         JumpAction->Execute();
     }
+    if(keystate[SDL_SCANCODE_ESCAPE])
+    {
+        QuitAction->Execute();
+    }
 }
