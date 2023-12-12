@@ -1,5 +1,7 @@
 #include <SDL.h>
 #include <string>
+
+#include "Camera.h"
 #include "Constants.h"
 #include "Font.h"
 #include "Sprite.h"
@@ -40,8 +42,12 @@ int main(int argc, char* args[])
 	input.MoveRightAction = &moveRight;
 	input.JumpAction = &jump;
 
+	//Collision setup
 	PlatformHandler platformHandler;
 	platformHandler.Setup();
+
+	//Camera setup
+	Camera camera = Camera{};
 
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
@@ -75,18 +81,21 @@ int main(int argc, char* args[])
 		//Collision
 		platformHandler.HandleCollision();
 
-		//Tick player and move player sprite TODO move player sprite to a location thats relative to the cameras instead of setting it straight to the players location
+		//Tick player
 		player.Tick(GetDeltaTime());
 		player.PlayerSprite->position = player.GetPlayerPosition();
+
+		//Update camera position
+		camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
 		
 #pragma region RENDERING
 		engine->Clear();
 
 		for (Sprite* platform : platformHandler.platforms)
 		{
-			engine->RenderSprite(platform);
+			engine->RenderSprite(platform, camera.GetRelativeLocation(platform->position));
 		}
-		engine->RenderSprite(player.PlayerSprite);
+		engine->RenderSprite(player.PlayerSprite, camera.GetRelativeLocation(player.GetPlayerPosition()));
 		
 		engine->Present();
 #pragma endregion

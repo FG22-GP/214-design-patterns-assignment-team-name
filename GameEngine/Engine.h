@@ -35,5 +35,5 @@ public:
 	Sprite* GetSprite(std::string path, Vector2 position, Vector2 size, bool isCollider);
 	void ReturnSprite(Sprite* sprite);
 
-	void RenderSprite(Sprite* sprite);
+	void RenderSprite(Sprite* sprite, Vector2 relativePosition);
 };

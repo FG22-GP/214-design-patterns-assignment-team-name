@@ -81,11 +81,11 @@ void Engine::ReturnSprite(Sprite* sprite)
 	sprites.push_back(sprite);
 }
 
-void Engine::RenderSprite(Sprite* sprite)
+void Engine::RenderSprite(Sprite* sprite, Vector2 relativePosition)
 {
 	SDL_Rect targetRectangle = SDL_Rect{
-		(int)sprite->position.x,
-		(int)sprite->position.y,
+		(int)relativePosition.x,
+		(int)relativePosition.y,
 		(int)sprite->size.x,
 		(int)sprite->size.y
 	};
