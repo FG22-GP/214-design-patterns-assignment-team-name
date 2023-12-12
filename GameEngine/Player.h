@@ -1,8 +1,6 @@
 ﻿#pragma once
-#include <set>
 
 #include "Engine.h"
-#include "GameObject.h"
 #include "Vector2.h"
 
 class Player

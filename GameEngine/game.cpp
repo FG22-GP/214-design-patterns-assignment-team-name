@@ -1,21 +1,14 @@
 #include <SDL.h>
-#include <string>
 
 #include "Camera.h"
 #include "Constants.h"
 #include "Font.h"
 #include "Sprite.h"
-#include "Text.h"
-#include "Window.h"
 #include "Engine.h"
 #include "PlatformHandler.h"
 #include "Player.h"
 #include "Vector2.h"
 #include "Input/Input.h"
-#include "Input/JumpCommand.h"
-#include "Input/MoveLeftCommand.h"
-#include "Input/MoveRightCommand.h"
-#include "Input/QuitCommand.h"
 
 //Delta time
 float LastFrameTime = 0.f;
