@@ -1,10 +1,10 @@
 ﻿#include "Text.h"
-
+#include "Engine.h"
 #include <format>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-Text::Text(const char* textString, SDL_Renderer* renderer, const char* fontFilePath, SDL_Color color)
+Text::Text(const char* textString, SDL_Renderer* renderer, const char* fontFilePath, SDL_Color color, Vector2 TextSize, Vector2 TextPosition)
 {
     Font font {fontFilePath};
     
@@ -26,6 +26,13 @@ Text::Text(const char* textString, SDL_Renderer* renderer, const char* fontFileP
         // get image dimensions
         textWidth = textSurface->w;
         textHeight = textSurface->h;
+        SDL_Rect textureRectangle = SDL_Rect{
+            (int)TextPosition.x,
+            (int)TextPosition.y,
+            textWidth,
+            textHeight
+        };
+        SDL_RenderCopy(Engine::GetInstance()->GetWindow()->renderer, textTexture, nullptr, &textureRectangle);
         // get rid of old loaded surface
         SDL_FreeSurface(textSurface);
     }

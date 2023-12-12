@@ -48,7 +48,7 @@ int main(int argc, char* args[])
 
 	//Collision setup
 	PlatformHandler platformHandler;
-	platformHandler.Setup();
+	//platformHandler.Setup();
 
 	//Camera setup
 	Camera camera = Camera{};
@@ -100,7 +100,7 @@ int main(int argc, char* args[])
 			engine->RenderSprite(platform, camera.GetRelativeLocation(platform->position));
 		}
 		engine->RenderSprite(player.PlayerSprite, camera.GetRelativeLocation(player.GetPlayerPosition()));
-		
+		winPoint.Win();
 		engine->Present();
 #pragma endregion
 
