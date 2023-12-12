@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Player.h"
-#include "WinPoint.h"
 
 inline Uint32 SetGroundedOnPlayer(Uint32 interval, void* name)
 {
@@ -12,8 +11,6 @@ class PlatformHandler
 {
 public:
     PlatformHandler();
-    WinPoint* winPoint;
-    Vector2 winPointLocation{1050, 600};
     
     static const int PlatformAmount = 7;
     Sprite* platforms[PlatformAmount];

@@ -11,3 +11,8 @@ void WinPoint::Win()
     
     SetWinBoolean(true);
 }
+
+void WinPoint::WinPointHandle()
+{
+    
+}

@@ -19,4 +19,5 @@ public:
         winBoolean = win_boolean;
     }
     void Win();
+    void WinPointHandle();
 };
