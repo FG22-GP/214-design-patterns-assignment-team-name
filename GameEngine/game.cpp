@@ -53,8 +53,10 @@ int main(int argc, char* args[])
 	//Camera setup
 	Camera camera = Camera{};
 
+	//Win Point setup
 	WinPoint winPoint;
-	winPoint.winPointSprite = engine->GetSprite(Constants::PLAYERSPRITEFILEPATH, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
+	winPoint.winPointSprite = engine->GetSprite(Constants::PLAYERSPRITEFILEPATH, Vector2 {1050.0, 400.0}, Vector2 {200.0, 200.0}, false);
+	
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
 	//const char* textString = "This is a piece of text";
@@ -85,6 +87,7 @@ int main(int argc, char* args[])
 
 		//Collision
 		platformHandler.HandleCollision();
+		winPoint.WinPointHandle();
 
 		//Tick player
 		player.Tick(GetDeltaTime());
@@ -92,7 +95,7 @@ int main(int argc, char* args[])
 
 		//Update camera position
 		camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
-		
+
 #pragma region RENDERING
 		engine->Clear();
 
@@ -102,6 +105,10 @@ int main(int argc, char* args[])
 		}
 		engine->RenderSprite(player.PlayerSprite, camera.GetRelativeLocation(player.GetPlayerPosition()));
 		engine->RenderSprite(winPoint.winPointSprite, camera.GetRelativeLocation(winPoint.winPointSprite->position));
+		
+		//Check if you won
+		if(winPoint.GetWinBoolean())
+			winPoint.Win();
 		
 		engine->Present();
 #pragma endregion
