@@ -9,6 +9,10 @@
 #include "Engine.h"
 #include "Player.h"
 #include "Vector2.h"
+#include "Input/Input.h"
+#include "Input/JumpCommand.h"
+#include "Input/MoveLeftCommand.h"
+#include "Input/MoveRightCommand.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1024;
@@ -52,8 +56,8 @@ int main(int argc, char* args[])
 	Engine* engine = Engine::GetInstance();
 	engine->Setup(SCREEN_WIDTH, SCREEN_WIDTH);
 
+	//Player setup
 	Player& player = Player::getInstance();
-
 	player.PlayerSprite = engine->GetSprite(pikachuImagePath, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
 	
 	//Create platforms
@@ -61,6 +65,15 @@ int main(int argc, char* args[])
 	{
 		platforms[i] = engine->GetSprite("img/Wall.png", platformLocations[i], Vector2 {300, 100}, false);
 	}
+
+	//Input setup
+	Input input = Input{};
+	MoveLeftCommand moveLeft = MoveLeftCommand{};
+	MoveRightCommand moveRight = MoveRightCommand{};
+	JumpCommand jump = JumpCommand{};
+	input.MoveLeftAction = &moveLeft;
+	input.MoveRightAction = &moveRight;
+	input.JumpAction = &jump;
 
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
@@ -80,7 +93,7 @@ int main(int argc, char* args[])
 		player.PlayerMovement(0);
 
 #pragma region INPUT
-		// loop through all pending events from Windows (OS)
+		//Quit input
 		while (SDL_PollEvent(&e))
 		{
 			if(e.type == SDL_QUIT)
@@ -89,20 +102,8 @@ int main(int argc, char* args[])
 			}
 		}
 
-		// Input (should be moved to its own class)
-		const Uint8* keystate = SDL_GetKeyboardState(NULL);
-		if (keystate[SDL_SCANCODE_A])
-		{
-			player.PlayerMovement(-1);
-		}
-		if (keystate[SDL_SCANCODE_D])
-		{
-			player.PlayerMovement(1);
-		}
-		if(keystate[SDL_SCANCODE_SPACE] || keystate[SDL_SCANCODE_W])
-		{
-			player.Jump();
-		}
+		//Player input
+		input.GetInput();
 #pragma endregion
 
 #pragma region COLLISION
