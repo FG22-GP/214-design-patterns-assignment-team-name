@@ -2,7 +2,7 @@
 #include "HelperFunctions.h"
 #include "Sprite.h"
 
-void PlatformHandler::Setup()
+PlatformHandler::PlatformHandler()
 {
     Engine* engine = Engine::GetInstance();
     for (int i = 0; i < PlatformAmount; i++)

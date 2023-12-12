@@ -10,6 +10,8 @@ inline Uint32 SetGroundedOnPlayer(Uint32 interval, void* name)
 class PlatformHandler
 {
 public:
+    PlatformHandler();
+    
     static const int PlatformAmount = 7;
     Sprite* platforms[PlatformAmount];
     Vector2 platformLocations[PlatformAmount]
@@ -23,7 +25,6 @@ public:
         Vector2{300,500},
         Vector2{600,400},
     };
-    
-    void Setup();
+
     void HandleCollision();
 };

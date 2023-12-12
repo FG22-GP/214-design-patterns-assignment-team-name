@@ -39,7 +39,6 @@ int main(int argc, char* args[])
 	
 	//Collision setup
 	PlatformHandler platformHandler;
-	platformHandler.Setup();
 
 	//Camera setup
 	Camera camera = Camera{};
