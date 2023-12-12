@@ -119,6 +119,7 @@
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WinPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\ext\SDL2-2.26.4\lib\x64\SDL2.dll">
@@ -150,6 +151,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WinPoint.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

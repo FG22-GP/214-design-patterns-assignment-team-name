@@ -37,4 +37,6 @@ public:
 	void ReturnSprite(Sprite* sprite);
 
 	void RenderSprite(Sprite* sprite, Vector2 relativePosition);
+
+	Window* GetWindow() const { return window; }
 };

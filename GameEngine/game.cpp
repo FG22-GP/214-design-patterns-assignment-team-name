@@ -1,14 +1,22 @@
 #include <SDL.h>
+#include <string>
 
 #include "Camera.h"
 #include "Constants.h"
 #include "Font.h"
 #include "Sprite.h"
+#include "Text.h"
+#include "Window.h"
 #include "Engine.h"
 #include "PlatformHandler.h"
 #include "Player.h"
 #include "Vector2.h"
 #include "Input/Input.h"
+#include "Input/JumpCommand.h"
+#include "Input/MoveLeftCommand.h"
+#include "Input/MoveRightCommand.h"
+#include "Input/QuitCommand.h"
+#include "WinPoint.h"
 
 //Delta time
 float LastFrameTime = 0.f;
@@ -29,13 +37,23 @@ int main(int argc, char* args[])
 	
 	//Input setup
 	Input input = Input{};
-	
+	MoveLeftCommand moveLeft = MoveLeftCommand{};
+	MoveRightCommand moveRight = MoveRightCommand{};
+	JumpCommand jump = JumpCommand{};
+	QuitCommand quitting = QuitCommand{};
+	input.MoveLeftAction = &moveLeft;
+	input.MoveRightAction = &moveRight;
+	input.JumpAction = &jump;
+	input.QuitAction = &quitting;
+
 	//Collision setup
 	PlatformHandler platformHandler;
+	platformHandler.Setup();
 
 	//Camera setup
 	Camera camera = Camera{};
 
+	WinPoint winPoint;
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
 	//const char* textString = "This is a piece of text";
@@ -52,15 +70,12 @@ int main(int argc, char* args[])
 
 		player.PlayerMovement(0);
 
-		//X button on window
+		//Quit input
 		while (SDL_PollEvent(&e))
 		{
-			if(e.type == SDL_KEYDOWN)
+			if(e.type == SDL_QUIT)
 			{
-				if (e.key.keysym.sym == SDLK_ESCAPE)
-				{
-					Engine::GetInstance()->quit = true;
-				}
+				Engine::GetInstance()->quit = true;
 			}
 		}
 
@@ -72,7 +87,8 @@ int main(int argc, char* args[])
 
 		//Tick player
 		player.Tick(GetDeltaTime());
-		
+		player.PlayerSprite->position = player.GetPlayerPosition();
+
 		//Update camera position
 		camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
 		
@@ -88,7 +104,6 @@ int main(int argc, char* args[])
 		engine->Present();
 #pragma endregion
 
-		//TODO update loop pattern
 		SDL_Delay(10);
 	}
 
