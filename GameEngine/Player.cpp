@@ -56,4 +56,7 @@ void Player::Tick(float deltaTime)
 
     //Move player
     SetPlayerPosition(GetPlayerPosition() + GetMovementDirection()  * deltaTime + Vector2(0,YForce));
+
+    //Update sprite location
+    PlayerSprite->position = GetPlayerPosition();
 }

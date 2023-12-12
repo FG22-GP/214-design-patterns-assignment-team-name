@@ -79,8 +79,7 @@ int main(int argc, char* args[])
 
 		//Tick player
 		player.Tick(GetDeltaTime());
-		player.PlayerSprite->position = player.GetPlayerPosition();
-
+		
 		//Update camera position
 		camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
 		
