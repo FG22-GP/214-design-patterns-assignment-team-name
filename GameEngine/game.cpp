@@ -43,6 +43,7 @@ int main(int argc, char* args[])
 	input.MoveLeftAction = &moveLeft;
 	input.MoveRightAction = &moveRight;
 	input.JumpAction = &jump;
+	input.QuitAction = &quitting;
 
 	//Collision setup
 	PlatformHandler platformHandler;
