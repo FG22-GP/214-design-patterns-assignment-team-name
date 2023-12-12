@@ -14,10 +14,6 @@
 #include "Input/MoveLeftCommand.h"
 #include "Input/MoveRightCommand.h"
 
-//File path constants
-std::string pikachuImagePath {"img/pikachu.png"};
-std::string fontFilePath {"font/lazy.ttf"};
-
 //Delta time
 float LastFrameTime = 0.f;
 float CurrentFrameTime = 0.f;
@@ -33,7 +29,7 @@ int main(int argc, char* args[])
 
 	//Player setup
 	Player& player = Player::getInstance();
-	player.PlayerSprite = engine->GetSprite(pikachuImagePath, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
+	player.PlayerSprite = engine->GetSprite(Constants::PLAYERSPRITEFILEPATH, Vector2 {0.0, 0.0}, Vector2 {200.0, 200.0}, false);
 	
 	//Input setup
 	Input input = Input{};
@@ -64,7 +60,6 @@ int main(int argc, char* args[])
 
 		player.PlayerMovement(0);
 
-#pragma region INPUT
 		//Quit input
 		while (SDL_PollEvent(&e))
 		{
@@ -76,11 +71,9 @@ int main(int argc, char* args[])
 
 		//Player input
 		input.GetInput();
-#pragma endregion
 
-#pragma region COLLISION
+		//Collision
 		platformHandler.HandleCollision();
-#pragma endregion
 
 		//Tick player and move player sprite TODO move player sprite to a location thats relative to the cameras instead of setting it straight to the players location
 		player.Tick(GetDeltaTime());
