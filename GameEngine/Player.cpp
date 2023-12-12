@@ -56,10 +56,4 @@ void Player::Tick(float deltaTime)
 
     //Move player
     SetPlayerPosition(GetPlayerPosition() + GetMovementDirection()  * deltaTime + Vector2(0,YForce));
-
-    //TODO replace this with actual collision with ground
-    if(GetPlayerPosition().y > 500.f)
-    {
-        SetGrounded(true);
-    }
 }
