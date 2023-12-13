@@ -8,6 +8,7 @@
 #include "Text.h"
 #include "Window.h"
 #include "Engine.h"
+#include "LosePoint.h"
 #include "PlatformHandler.h"
 #include "Player.h"
 #include "Vector2.h"
@@ -54,7 +55,10 @@ int main(int argc, char* args[])
 
 	//Win Point setup
 	WinPoint winPoint;
-	winPoint.winPointSprite = engine->GetSprite(Constants::PLAYERSPRITEFILEPATH, Vector2 {1050.0, 400.0}, Vector2 {200.0, 200.0}, false);
+	winPoint.winPointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {1150.0, 0.0}, Vector2 {50.0, 600.0}, false);
+	
+	LosePoint losePoint;
+	losePoint.losePointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {-500.0, 1000.0}, Vector2 {2500.0, 50.0}, false);
 	
 	// create text
 	//SDL_Color textColor = { 0xff, 0xff, 0xff };
@@ -81,20 +85,23 @@ int main(int argc, char* args[])
 			}
 		}
 
+		
 		//Player input
 		input.GetInput();
+		if(!winPoint.GetWinBoolean() && !losePoint.GetLoseBoolean())
+		{
+			//Collision
+			platformHandler.HandleCollision();
+			winPoint.WinPointHandle();
+			losePoint.LosePointHandle();
+			
+			//Tick player
+			player.Tick(GetDeltaTime());
+			player.PlayerSprite->position = player.GetPlayerPosition();
 
-		//Collision
-		platformHandler.HandleCollision();
-		winPoint.WinPointHandle();
-
-		//Tick player
-		player.Tick(GetDeltaTime());
-		player.PlayerSprite->position = player.GetPlayerPosition();
-
-		//Update camera position
-		camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
-
+			//Update camera position
+			camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
+		}
 #pragma region RENDERING
 		engine->Clear();
 
@@ -104,10 +111,14 @@ int main(int argc, char* args[])
 		}
 		engine->RenderSprite(player.PlayerSprite, camera.GetRelativeLocation(player.GetPlayerPosition()));
 		engine->RenderSprite(winPoint.winPointSprite, camera.GetRelativeLocation(winPoint.winPointSprite->position));
+		engine->RenderSprite(losePoint.losePointSprite, camera.GetRelativeLocation(losePoint.losePointSprite->position));
 		
 		//Check if you won
 		if(winPoint.GetWinBoolean())
 			winPoint.Win();
+		//Check if you lose
+		else if(losePoint.GetLoseBoolean())
+			losePoint.Lose();
 		
 		engine->Present();
 #pragma endregion
