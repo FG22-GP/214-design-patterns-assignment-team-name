@@ -102,7 +102,11 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="Animation\Animator.cpp" />
+    <ClCompile Include="Animation\PlayerFallLeftAnimation.cpp" />
+    <ClCompile Include="Animation\PlayerFallRightAnimation.cpp" />
     <ClCompile Include="Animation\PlayerIdleAnimation.cpp" />
+    <ClCompile Include="Animation\PlayerJumpLeftAnimation.cpp" />
+    <ClCompile Include="Animation\PlayerJumpRightAnimation.cpp" />
     <ClCompile Include="Animation\PlayerRunRightAnimation.cpp" />
     <ClCompile Include="Animation\PlayerRunLeftAnimation.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -212,7 +216,11 @@
   <ItemGroup>
     <ClInclude Include="Animation\Animation.h" />
     <ClInclude Include="Animation\Animator.h" />
+    <ClInclude Include="Animation\PlayerFallLeftAnimation.h" />
+    <ClInclude Include="Animation\PlayerFallRightAnimation.h" />
     <ClInclude Include="Animation\PlayerIdleAnimation.h" />
+    <ClInclude Include="Animation\PlayerJumpLeftAnimation.h" />
+    <ClInclude Include="Animation\PlayerJumpRightAnimation.h" />
     <ClInclude Include="Animation\PlayerRunRightAnimation.h" />
     <ClInclude Include="Animation\PlayerRunLeftAnimation.h" />
     <ClInclude Include="Camera.h" />

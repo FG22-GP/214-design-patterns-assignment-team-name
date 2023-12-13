@@ -25,6 +25,8 @@ private:
     float Gravity = -0.1f;
 
     Animator animator;
+    void UpdateAnimation();
+    float LastRecordedDirectionPress = 0.f;
     
 public:
     Sprite* PlayerSprite;
