@@ -106,16 +106,20 @@ void Player::UpdateAnimation()
     else if(GetMovementDirection().magnitude() > 0.f && !isGrounded && YForce < 0) //Moving while rising midair
     {
         animator.CurrentAnimation = GetMovementDirection().x > 0.f ? "JumpRight" : "JumpLeft";
-    }else if(GetMovementDirection().magnitude() > 0.f && !isGrounded && YForce > 0) //Moving while falling midair
+    }
+    else if(GetMovementDirection().magnitude() > 0.f && !isGrounded && YForce > 0) //Moving while falling midair
     {
         animator.CurrentAnimation = GetMovementDirection().x > 0.f ? "FallRight" : "FallLeft";
-    }else if(!isGrounded && YForce < 0) //Rising midair
+    }
+    else if(!isGrounded && YForce < 0) //Rising midair
     {
         animator.CurrentAnimation = LastRecordedDirectionPress > 0 ? "JumpRight" : "JumpLeft";
-    }else if(!isGrounded && YForce > 0) //Falling midair
+    }
+    else if(!isGrounded && YForce > 0) //Falling midair
     {
         animator.CurrentAnimation = LastRecordedDirectionPress > 0 ? "FallRight" : "FallLeft";
-    }else //Idle
+    }
+    else //Idle
     {
         animator.CurrentAnimation = "Idle";
     }
