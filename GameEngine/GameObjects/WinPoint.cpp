@@ -14,7 +14,7 @@ void WinPoint::Win()
 
 void WinPoint::WinPointHandle()
 {
-    if(HelperFunctions::CheckIntersection(Player::getInstance().PlayerSprite->position, Player::getInstance().PlayerSprite->size, winPointSprite->position, winPointSprite->size))
+    if(HelperFunctions::CheckIntersection(Player::getInstance().sprite->position, Player::getInstance().sprite->size, winPointSprite->position, winPointSprite->size))
     {
         SetWinBoolean(true);
     }

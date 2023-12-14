@@ -14,7 +14,7 @@ void LosePoint::Lose()
 
 void LosePoint::LosePointHandle()
 {
-    if(HelperFunctions::CheckIntersection(Player::getInstance().PlayerSprite->position, Player::getInstance().PlayerSprite->size, losePointSprite->position, losePointSprite->size))
+    if(HelperFunctions::CheckIntersection(Player::getInstance().sprite->position, Player::getInstance().sprite->size, losePointSprite->position, losePointSprite->size))
     {
         SetLoseBoolean(true);
     }

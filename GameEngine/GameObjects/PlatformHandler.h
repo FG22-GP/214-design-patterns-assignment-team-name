@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Entity.h"
 #include "Player.h"
 
 inline Uint32 SetGroundedOnPlayer(Uint32 interval, void* name)
@@ -26,5 +27,9 @@ public:
         Vector2{600,400},
     };
 
-    void HandleCollision();
+    void HandleCollision(Entity& entity);
+
+private:
+    Entity* currentEntity; // Store the current entity for the timer callback
+    static Uint32 SetGroundedOnEntity(Uint32 interval, void* param);
 };

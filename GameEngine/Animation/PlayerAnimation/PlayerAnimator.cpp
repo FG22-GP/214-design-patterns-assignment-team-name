@@ -18,14 +18,14 @@ PlayerAnimator::PlayerAnimator(Sprite* InSprite, std::string DefaultAnimation, P
      
      TransitionList =
      {
-         AnimationTransition{ "Fall", [InPlayer]{return !InPlayer->GetGrounded() && InPlayer->YForce > 0.f;} },
-         AnimationTransition{ "Jump", [InPlayer]{return !InPlayer->GetGrounded() && InPlayer->YForce < 0.f;} },AnimationTransition{ "Idle", [InPlayer]{return InPlayer->GetMovementDirection().magnitude() == 0.f;} },
+         AnimationTransition{ "Fall", [InPlayer]{return !InPlayer->GetGrounded() && InPlayer->yForce > 0.f;} },
+         AnimationTransition{ "Jump", [InPlayer]{return !InPlayer->GetGrounded() && InPlayer->yForce < 0.f;} },AnimationTransition{ "Idle", [InPlayer]{return InPlayer->GetMovementDirection().magnitude() == 0.f;} },
      };
      AnimationStates["Run"] = AnimationState{ PlayerRunAnimation{}, TransitionList };
      
      TransitionList =
      {
-         AnimationTransition{ "Fall", [InPlayer]{return !InPlayer->GetGrounded() && InPlayer->YForce > 0.f;} },
+         AnimationTransition{ "Fall", [InPlayer]{return !InPlayer->GetGrounded() && InPlayer->yForce > 0.f;} },
          AnimationTransition{ "Run", [InPlayer]{return InPlayer->GetGrounded();} },
      };
      AnimationStates["Jump"] = AnimationState{ PlayerJumpAnimation{}, TransitionList };

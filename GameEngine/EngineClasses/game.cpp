@@ -8,6 +8,7 @@
 #include "../GameObjects/PlatformHandler.h"
 #include "../GameObjects/Player.h"
 #include "Vector2.h"
+#include "../GameObjects/Enemy.h"
 #include "../Input/Input.h"
 #include "../GameObjects/WinPoint.h"
 
@@ -27,6 +28,9 @@ int main(int argc, char* args[])
 	//Player setup
 	Player& player = Player::getInstance();
 	player.Setup();
+
+	Enemy enemy = Enemy{Vector2(300, 0)};
+	enemy.Setup();
 	
 	//Input setup
 	Input input = Input{};
@@ -68,16 +72,20 @@ int main(int argc, char* args[])
 		if(!winPoint.GetWinBoolean() && !losePoint.GetLoseBoolean())
 		{
 			//Collision
-			platformHandler.HandleCollision();
+			platformHandler.HandleCollision(enemy);
+			platformHandler.HandleCollision(player);
 			winPoint.WinPointHandle();
 			losePoint.LosePointHandle();
 			
 			//Tick player
 			player.Tick(GetDeltaTime());
-			player.PlayerSprite->position = player.GetPlayerPosition();
+			player.sprite->position = player.GetPosition();
+
+			enemy.Tick(GetDeltaTime());
+			enemy.sprite->position = enemy.GetPosition();
 
 			//Update camera position
-			camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
+			camera.Position = Vector2{player.GetMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
 		}
 		
 #pragma region RENDERING
@@ -87,9 +95,10 @@ int main(int argc, char* args[])
 		{
 			engine->RenderSprite(platform, camera.GetRelativeLocation(platform->position));
 		}
-		engine->RenderSprite(player.PlayerSprite, camera.GetRelativeLocation(player.GetPlayerPosition()));
+		engine->RenderSprite(player.sprite, camera.GetRelativeLocation(player.sprite->position));
 		engine->RenderSprite(winPoint.winPointSprite, camera.GetRelativeLocation(winPoint.winPointSprite->position));
 		engine->RenderSprite(losePoint.losePointSprite, camera.GetRelativeLocation(losePoint.losePointSprite->position));
+		engine->RenderSprite(enemy.sprite, camera.GetRelativeLocation(enemy.sprite->position));
 		
 		//Check if you won
 		if(winPoint.GetWinBoolean())
