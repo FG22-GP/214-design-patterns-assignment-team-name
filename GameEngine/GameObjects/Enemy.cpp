@@ -41,3 +41,8 @@ void Enemy::Tick(float deltaTime)
     sprite->position = GetPosition();
 }
 
+void Enemy::HasCollidedWith(Entity* collidedEntity)
+{
+    
+}
+

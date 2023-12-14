@@ -22,12 +22,15 @@ private:
 
     PlayerAnimator animator;
 
+    static Uint32 SetGroundedOnPlayer(Uint32 interval, void* param);
+
 public:
     float LastRecordedDirectionPress = 0.f;
     
     void Jump();
     void PlayerMovement(float input);
     void Setup();
+    void HasCollidedWith(Entity* collidedEntity) override;
     void Tick(float deltaTime) override;
     //void Tick(float deltaTime);
 

@@ -3,6 +3,14 @@
 
 class EntityManager
 {
+#pragma region "Singleton logic"
+    EntityManager() {}
+public:
+    static EntityManager& GetInstance() { static EntityManager instance; return instance; }
+    EntityManager(EntityManager const&) = delete;
+    void operator=(EntityManager const&) = delete;
+#pragma endregion
+    
 public:
     Entity* firstEntity = nullptr;
     Entity* lastEntity = nullptr;

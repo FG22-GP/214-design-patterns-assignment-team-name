@@ -26,5 +26,5 @@ public:
     void Setup();
     void Tick(float gameTime) override;
     
-
+    void HasCollidedWith(Entity* collidedEntity) override;
 };
