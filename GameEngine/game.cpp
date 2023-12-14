@@ -38,14 +38,6 @@ int main(int argc, char* args[])
 	
 	//Input setup
 	Input input = Input{};
-	MoveLeftCommand moveLeft = MoveLeftCommand{};
-	MoveRightCommand moveRight = MoveRightCommand{};
-	JumpCommand jump = JumpCommand{};
-	QuitCommand quitting = QuitCommand{};
-	input.MoveLeftAction = &moveLeft;
-	input.MoveRightAction = &moveRight;
-	input.JumpAction = &jump;
-	input.QuitAction = &quitting;
 
 	//Collision setup
 	PlatformHandler platformHandler;
@@ -53,17 +45,11 @@ int main(int argc, char* args[])
 	//Camera setup
 	Camera camera = Camera{};
 
-	//Win Point setup
+	//Win and lose points setup
 	WinPoint winPoint;
 	winPoint.winPointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {1150.0, 0.0}, Vector2 {50.0, 600.0}, false);
-	
 	LosePoint losePoint;
 	losePoint.losePointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {-500.0, 1000.0}, Vector2 {2500.0, 50.0}, false);
-	
-	// create text
-	//SDL_Color textColor = { 0xff, 0xff, 0xff };
-	//const char* textString = "This is a piece of text";
-	//Text text {textString, window.renderer, fontFilePath, textColor};
 
 	SDL_Event e;
 
@@ -84,10 +70,10 @@ int main(int argc, char* args[])
 				Engine::GetInstance()->quit = true;
 			}
 		}
-
 		
 		//Player input
 		input.GetInput();
+		
 		if(!winPoint.GetWinBoolean() && !losePoint.GetLoseBoolean())
 		{
 			//Collision
@@ -102,6 +88,7 @@ int main(int argc, char* args[])
 			//Update camera position
 			camera.Position = Vector2{player.PlayerMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
 		}
+		
 #pragma region RENDERING
 		engine->Clear();
 
