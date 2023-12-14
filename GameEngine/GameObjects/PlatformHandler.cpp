@@ -1,8 +1,8 @@
 ﻿#include "PlatformHandler.h"
-#include "Constants.h"
-#include "Engine.h"
-#include "HelperFunctions.h"
-#include "Sprite.h"
+#include "../HelperClasses/Constants.h"
+#include "../EngineClasses/Engine.h"
+#include "../HelperClasses/HelperFunctions.h"
+#include "../EngineClasses/Sprite.h"
 
 PlatformHandler::PlatformHandler()
 {

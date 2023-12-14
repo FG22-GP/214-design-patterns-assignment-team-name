@@ -1,5 +1,5 @@
 #pragma once
-#include "Sprite.h"
+#include "../EngineClasses/Sprite.h"
 
 class WinPoint
 {

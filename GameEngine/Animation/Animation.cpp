@@ -1,6 +1,6 @@
 ﻿#include "Animation.h"
 #include <SDL_timer.h>
-#include "../Engine.h"
+#include "../EngineClasses/Engine.h"
 
 void Animation::CreateTextures()
 {

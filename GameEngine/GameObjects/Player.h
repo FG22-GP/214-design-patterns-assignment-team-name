@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "Vector2.h"
-#include "Sprite.h"
-#include "Animation/PlayerAnimation/PlayerAnimator.h"
+#include "../EngineClasses/Vector2.h"
+#include "../EngineClasses/Sprite.h"
+#include "../Animation/PlayerAnimation/PlayerAnimator.h"
 
 class Player
 {

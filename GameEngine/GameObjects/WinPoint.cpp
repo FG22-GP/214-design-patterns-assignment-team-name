@@ -1,8 +1,8 @@
 #include "WinPoint.h"
-#include "Constants.h"
-#include "Text.h"
-#include "Engine.h"
-#include "HelperFunctions.h"
+#include "../HelperClasses/Constants.h"
+#include "../EngineClasses/Text.h"
+#include "../EngineClasses/Engine.h"
+#include "../HelperClasses/HelperFunctions.h"
 #include "Player.h"
 
 void WinPoint::Win()

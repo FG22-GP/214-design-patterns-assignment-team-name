@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <list>
 
-#include "../Sprite.h"
+#include "../EngineClasses/Sprite.h"
 
 class Animation
 {

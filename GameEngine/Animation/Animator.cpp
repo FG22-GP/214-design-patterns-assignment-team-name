@@ -1,5 +1,5 @@
 ﻿#include "Animator.h"
-#include "../Sprite.h"
+#include "../EngineClasses/Sprite.h"
 
 class Player;
 

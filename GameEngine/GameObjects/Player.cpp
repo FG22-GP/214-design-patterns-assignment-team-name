@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
-#include "Constants.h"
-#include "Engine.h"
-#include "Animation/PlayerAnimation/PlayerAnimator.h"
+#include "../HelperClasses/Constants.h"
+#include "../EngineClasses/Engine.h"
+#include "../Animation/PlayerAnimation/PlayerAnimator.h"
 
 void Player::Setup()
 {

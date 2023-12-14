@@ -1,5 +1,5 @@
 ﻿#include "HelperFunctions.h"
-#include "Vector2.h"
+#include "../EngineClasses/Vector2.h"
 
 float HelperFunctions::DotProduct(Vector2 V1, Vector2 V2)
 {

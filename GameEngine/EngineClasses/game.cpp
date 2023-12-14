@@ -1,15 +1,15 @@
 #include <SDL.h>
 
-#include "Camera.h"
-#include "Constants.h"
+#include "../GameObjects/Camera.h"
+#include "../HelperClasses/Constants.h"
 #include "Sprite.h"
 #include "Engine.h"
-#include "LosePoint.h"
-#include "PlatformHandler.h"
-#include "Player.h"
+#include "../GameObjects/LosePoint.h"
+#include "../GameObjects/PlatformHandler.h"
+#include "../GameObjects/Player.h"
 #include "Vector2.h"
-#include "Input/Input.h"
-#include "WinPoint.h"
+#include "../Input/Input.h"
+#include "../GameObjects/WinPoint.h"
 
 //Delta time
 float LastFrameTime = 0.f;
