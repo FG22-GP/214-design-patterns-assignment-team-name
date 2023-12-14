@@ -90,5 +90,11 @@ void Engine::RenderSprite(Sprite* sprite, Vector2 relativePosition)
 		(int)sprite->size.y
 	};
 
-	SDL_RenderCopy(window->renderer, sprite->texture->texture, nullptr, &targetRectangle);
+	if(sprite->flip)
+	{
+		SDL_RenderCopyEx(window->renderer, sprite->texture->texture, nullptr, &targetRectangle, 0, nullptr, SDL_FLIP_HORIZONTAL);
+	}else
+	{
+		SDL_RenderCopy(window->renderer, sprite->texture->texture, nullptr, &targetRectangle);
+	}
 }

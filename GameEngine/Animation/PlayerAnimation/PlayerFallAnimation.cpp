@@ -1,6 +1,6 @@
-﻿#include "PlayerFallRightAnimation.h"
+﻿#include "PlayerFallAnimation.h"
 
-PlayerFallRightAnimation::PlayerFallRightAnimation()
+PlayerFallAnimation::PlayerFallAnimation()
 {
     TimeBetweenFrames = 1.f;
     

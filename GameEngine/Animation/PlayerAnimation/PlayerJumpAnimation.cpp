@@ -1,6 +1,6 @@
-﻿#include "PlayerJumpRightAnimation.h"
+﻿#include "PlayerJumpAnimation.h"
 
-PlayerJumpRightAnimation::PlayerJumpRightAnimation()
+PlayerJumpAnimation::PlayerJumpAnimation()
 {
     TimeBetweenFrames = 1.f;
     

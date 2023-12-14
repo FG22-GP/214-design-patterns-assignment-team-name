@@ -1,11 +1,29 @@
 ﻿#include "Animator.h"
+#include "../Sprite.h"
 
-Animator::Animator(Sprite* InSprite)
+class Player;
+
+Animator::Animator(Sprite* InSprite, std::string DefaultAnimation)
 {
-    MySprite = InSprite;
+    TargetSprite = InSprite;
+    CurrentState = DefaultAnimation;
 }
 
 void Animator::UpdateSprite()
 {
-    MySprite->texture = Animations[CurrentAnimation].GetTexture();
+    //Transition state if a transition was triggered
+    for (auto Transition : AnimationStates[CurrentState].Transitions)
+    {
+        if(Transition.TransitionCondition())
+        {
+            CurrentState = Transition.StateToTransitionTo;
+            break;
+        }
+    }
+
+    //Update flip
+    TargetSprite->flip = FlipSpriteCondition();
+
+    //Update texture
+    TargetSprite->texture = AnimationStates[CurrentState].Animation.GetTexture();
 }

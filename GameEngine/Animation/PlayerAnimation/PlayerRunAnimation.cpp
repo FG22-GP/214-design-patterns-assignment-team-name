@@ -1,6 +1,6 @@
-﻿#include "PlayerRunRightAnimation.h"
+﻿#include "PlayerRunAnimation.h"
 
-PlayerRunRightAnimation::PlayerRunRightAnimation()
+PlayerRunAnimation::PlayerRunAnimation()
 {
     TimeBetweenFrames = 0.1f;
     

@@ -13,4 +13,5 @@ public:
     Vector2 position;
     Vector2 size;
     bool isCollider;
+    bool flip = false;
 };

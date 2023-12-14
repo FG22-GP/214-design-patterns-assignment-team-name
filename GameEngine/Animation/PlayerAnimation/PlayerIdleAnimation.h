@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Animation.h"
+#include "../Animation.h"
 
 class PlayerIdleAnimation : public Animation
 {
