@@ -35,9 +35,9 @@ int main(int argc, char* args[])
 	player.Setup();
 	EntityManager::GetInstance().AddEntity(&player);
 
-	Enemy enemy = Enemy{Vector2(300, 0)};
-	enemy.Setup();
-	EntityManager::GetInstance().AddEntity(&enemy);
+	// Enemy enemy = Enemy{Vector2(300, 0)};
+	// enemy.Setup();
+	// EntityManager::GetInstance().AddEntity(&enemy);
 	
 	//Input setup
 	Input input = Input{};
@@ -50,9 +50,9 @@ int main(int argc, char* args[])
 
 	//Win and lose points setup
 	WinPoint winPoint;
-	winPoint.winPointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {1150.0, 0.0}, Vector2 {50.0, 600.0}, false);
+	winPoint.winPointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {5850.0, 0.0}, Vector2 {50.0, 600.0}, false);
 	LosePoint losePoint;
-	losePoint.losePointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {-500.0, 1000.0}, Vector2 {2500.0, 50.0}, false);
+	losePoint.losePointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {-500.0, 1000.0}, Vector2 {8000.0, 50.0}, false);
 
 	SDL_Event e;
 	// while the user doesn't want to quit
@@ -79,18 +79,19 @@ int main(int argc, char* args[])
 		if(!winPoint.GetWinBoolean() && !losePoint.GetLoseBoolean())
 		{
 			//Collision
-			platformHandler.HandleCollision(enemy);
+			//platformHandler.HandleCollision(enemy);
 			platformHandler.HandleCollision(player);
 
 			winPoint.WinPointHandle();
 			losePoint.LosePointHandle();
 
 			//Update Collision (Entities)
-			collisionManager.CollisionUpdate();
+			//collisionManager.CollisionUpdate();
 
 			//Update Entities
-			EntityManager::GetInstance().Update(GetDeltaTime());
+			//EntityManager::GetInstance().Update(GetDeltaTime());
 
+			player.Tick(GetDeltaTime());
 			
 			//Update camera position
 			camera.Position = Vector2{player.GetMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
@@ -106,7 +107,8 @@ int main(int argc, char* args[])
 		engine->RenderSprite(player.sprite, camera.GetRelativeLocation(player.sprite->position));
 		engine->RenderSprite(winPoint.winPointSprite, camera.GetRelativeLocation(winPoint.winPointSprite->position));
 		engine->RenderSprite(losePoint.losePointSprite, camera.GetRelativeLocation(losePoint.losePointSprite->position));
-		engine->RenderSprite(enemy.sprite, camera.GetRelativeLocation(enemy.sprite->position));
+		//engine->RenderSprite(enemy.sprite, camera.GetRelativeLocation(enemy.sprite->position));
+			
 		
 		//Check if you won
 		if(winPoint.GetWinBoolean())
@@ -120,7 +122,6 @@ int main(int argc, char* args[])
 
 		SDL_Delay(10);
 	}
-	SDL_Quit();
 	return 0;
 }
 

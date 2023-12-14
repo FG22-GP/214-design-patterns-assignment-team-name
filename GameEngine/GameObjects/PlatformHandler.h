@@ -13,7 +13,7 @@ class PlatformHandler
 public:
     PlatformHandler();
     
-    static const int PlatformAmount = 7;
+    static const int PlatformAmount = 20;
     Sprite* platforms[PlatformAmount];
     Vector2 platformLocations[PlatformAmount]
     {
@@ -21,10 +21,26 @@ public:
         Vector2{300,600},
         Vector2{600,600},
         Vector2{900,600},
+        Vector2{1700,600},
+        Vector2{2000,600},
+        Vector2{2300,600},
+        Vector2{2600,600},
+        Vector2{2900,600},
+        Vector2{3200,600},
 
-        Vector2{0,200},
-        Vector2{300,500},
-        Vector2{600,400},
+        Vector2{3500,500},
+        Vector2{3800,400},
+        Vector2{4100,300},
+
+        Vector2{4700,300},
+        Vector2{5000,400},
+        Vector2{5300,500},
+        
+        Vector2{5600,600},
+        
+        Vector2{2300,500},
+        Vector2{2600,300},
+        Vector2{2900,300},
     };
 
     void HandleCollision(Entity& entity);

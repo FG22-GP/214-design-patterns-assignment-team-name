@@ -32,6 +32,7 @@ public:
     void Setup();
     void HasCollidedWith(Entity* collidedEntity) override;
     void Tick(float deltaTime) override;
+    void Draw() override;
     //void Tick(float deltaTime);
 
     bool GetGrounded() { return isGrounded; }

@@ -21,6 +21,6 @@ public:
     Entity* GetEntityWithId(int id);
 
     void Update(float deltaTime);
-    void Draw(float deltaTime);
+    void Draw();
     
 };

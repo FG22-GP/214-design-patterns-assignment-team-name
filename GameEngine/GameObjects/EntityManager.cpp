@@ -23,7 +23,6 @@ void EntityManager::RemoveEntityWithId(int id)
     if (firstEntity->uniqueId == id)
     {
         firstEntity = firstEntity->nextEntity;
-        
     }
     else
     {
@@ -35,12 +34,11 @@ void EntityManager::RemoveEntityWithId(int id)
         if (stepEntity->nextEntity != nullptr && stepEntity->nextEntity->uniqueId == id)
         {
             stepEntity->nextEntity = stepEntity->nextEntity->nextEntity;
-            
+
             if (stepEntity->nextEntity == nullptr)
             {
                 lastEntity = stepEntity;
             }
-            
         }
     }
 }
@@ -56,7 +54,6 @@ Entity* EntityManager::GetEntityWithId(int id)
         stepEntity = stepEntity->nextEntity;
     }
     return nullptr;
-    
 }
 
 
@@ -70,9 +67,12 @@ void EntityManager::Update(float deltaTime)
     }
 }
 
-void EntityManager::Draw(float deltaTime)
+void EntityManager::Draw()
 {
-    
+    Entity* stepEntity = firstEntity;
+    while (stepEntity != nullptr)
+    {
+        stepEntity->Draw();
+        stepEntity = stepEntity->nextEntity;
+    }
 }
-
-

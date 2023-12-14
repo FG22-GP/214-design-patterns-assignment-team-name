@@ -28,6 +28,7 @@ public:
     virtual void SetGrounded(bool grounding);
 
     virtual void Tick(float deltaTime) = 0;
+    virtual void Draw() = 0;
     virtual void HasCollidedWith(Entity* collidedEntity) = 0;
     
 };
