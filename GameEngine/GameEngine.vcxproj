@@ -993,6 +993,7 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Enemy.cpp" />
     <ClCompile Include="GameObjects\Entity.cpp" />
+    <ClCompile Include="GameObjects\EntityManager.cpp" />
     <ClCompile Include="GameObjects\GameObject.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1546,6 +1547,7 @@
     <ClInclude Include="GameObjects\Camera.h" />
     <ClInclude Include="GameObjects\Enemy.h" />
     <ClInclude Include="GameObjects\Entity.h" />
+    <ClInclude Include="GameObjects\EntityManager.h" />
     <ClInclude Include="GameObjects\GameObject.h" />
     <ClInclude Include="GameObjects\LosePoint.h" />
     <ClInclude Include="GameObjects\PlatformHandler.h" />

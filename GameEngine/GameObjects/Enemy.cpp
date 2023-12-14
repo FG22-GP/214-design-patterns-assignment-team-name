@@ -37,29 +37,7 @@ void Enemy::Tick(float deltaTime)
     }
     
     SetPosition(GetPosition() + movementDirection * deltaTime + Vector2(0, yForce));
-
-    sprite->position = GetPosition();
     
+    sprite->position = GetPosition();
 }
 
-
-// void Enemy::SetMovementDirection(Vector2 dir)
-// {
-//     movementDirection = dir;
-// }
-
-// Vector2 Enemy::GetPosition()
-// {
-//     return position;
-// }
-
-// Vector2 Enemy::EnemyMiddle()
-// {
-//     return GetPosition() + EnemySprite->size / 2.f;
-// }
-
-//
-// void Enemy::SetEnemyPosition(Vector2 newPosition)
-// {
-//     position = newPosition;
-// }

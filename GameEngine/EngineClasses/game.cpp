@@ -9,6 +9,7 @@
 #include "../GameObjects/Player.h"
 #include "Vector2.h"
 #include "../GameObjects/Enemy.h"
+#include "../GameObjects/EntityManager.h"
 #include "../Input/Input.h"
 #include "../GameObjects/WinPoint.h"
 
@@ -25,12 +26,17 @@ int main(int argc, char* args[])
 	Engine* engine = Engine::GetInstance();
 	engine->Setup(Constants::SCREEN_WIDTH, Constants::SCREEN_WIDTH);
 
+	EntityManager entityManager = EntityManager{};
+	
 	//Player setup
 	Player& player = Player::getInstance();
 	player.Setup();
+	entityManager.AddEntity(&player);
 
 	Enemy enemy = Enemy{Vector2(300, 0)};
 	enemy.Setup();
+	entityManager.AddEntity(&enemy);
+	
 	
 	//Input setup
 	Input input = Input{};
@@ -74,15 +80,15 @@ int main(int argc, char* args[])
 			//Collision
 			platformHandler.HandleCollision(enemy);
 			platformHandler.HandleCollision(player);
+			// for (int i = 0; i < entityManager.uniqueIdCounter; i++)
+			// {
+			// 	platformHandler.HandleCollision(entityManager.GetEntityWithId(i));
+			// }
 			winPoint.WinPointHandle();
 			losePoint.LosePointHandle();
-			
-			//Tick player
-			player.Tick(GetDeltaTime());
-			player.sprite->position = player.GetPosition();
 
-			enemy.Tick(GetDeltaTime());
-			enemy.sprite->position = enemy.GetPosition();
+			//Update Entities
+			entityManager.Update(GetDeltaTime());
 
 			//Update camera position
 			camera.Position = Vector2{player.GetMiddle().x - Constants::SCREEN_WIDTH / 2, 0};

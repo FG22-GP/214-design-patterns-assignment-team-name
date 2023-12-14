@@ -24,14 +24,7 @@ public:
     void EnemyMovement(float input);
     
     void Setup();
-    void Tick(float deltaTime);
+    void Tick(float gameTime) override;
     
-    // Sprite* EnemySprite;
-    //
-    // float YForce = 0.f;
-    //void SetMovementDirection(Vector2 dir);
-    //Vector2 GetPosition();
-    //Vector2 EnemyMiddle();
-    //void SetGrounded(bool grounding);
-    //void SetEnemyPosition(Vector2 newPosition);
+
 };

@@ -28,7 +28,8 @@ public:
     void Jump();
     void PlayerMovement(float input);
     void Setup();
-    void Tick(float deltaTime);
+    void Tick(float deltaTime) override;
+    //void Tick(float deltaTime);
 
     bool GetGrounded() { return isGrounded; }
 };

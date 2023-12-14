@@ -13,7 +13,10 @@ public:
     Vector2 movementDirection;
 
     float yForce;
+    int uniqueId;
     bool isGrounded;
+
+    Entity* nextEntity;
 
     virtual Vector2 GetMiddle();
     virtual Vector2 GetPosition();
@@ -23,5 +26,7 @@ public:
     virtual void SetMovementDirection(const Vector2& direction);
 
     virtual void SetGrounded(bool grounding);
+
+    virtual void Tick(float deltaTime) = 0;
     
 };
