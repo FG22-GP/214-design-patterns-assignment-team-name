@@ -1,6 +1,5 @@
 ﻿#include "QuitCommand.h"
-#include "../Engine.h"
-#include "../Player.h"
+#include "../EngineClasses/Engine.h"
 
 void QuitCommand::Execute()
 {

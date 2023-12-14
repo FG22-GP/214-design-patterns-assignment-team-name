@@ -1,5 +1,5 @@
 ﻿#include "MoveLeftCommand.h"
-#include "../Player.h"
+#include "../GameObjects/Player.h"
 
 void MoveLeftCommand::Execute()
 {

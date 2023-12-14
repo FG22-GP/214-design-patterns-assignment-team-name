@@ -1,5 +1,5 @@
 ﻿#include "JumpCommand.h"
-#include "../Player.h"
+#include "../GameObjects/Player.h"
 
 void JumpCommand::Execute()
 {
