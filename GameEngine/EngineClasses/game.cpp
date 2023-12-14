@@ -44,7 +44,6 @@ int main(int argc, char* args[])
 	losePoint.losePointSprite = engine->GetSprite(Constants::WINSPRITEFILEPATH, Vector2 {-500.0, 1000.0}, Vector2 {2500.0, 50.0}, false);
 
 	SDL_Event e;
-
 	// while the user doesn't want to quit
 	while (Engine::GetInstance()->quit == false)
 	{
