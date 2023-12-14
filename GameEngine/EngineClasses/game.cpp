@@ -85,12 +85,12 @@ int main(int argc, char* args[])
 			winPoint.WinPointHandle();
 			losePoint.LosePointHandle();
 
+			//Update Collision (Entities)
+			collisionManager.CollisionUpdate();
 
 			//Update Entities
 			EntityManager::GetInstance().Update(GetDeltaTime());
 
-			//Update Collision (Entities)
-			collisionManager.CollisionUpdate();
 			
 			//Update camera position
 			camera.Position = Vector2{player.GetMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
@@ -120,7 +120,7 @@ int main(int argc, char* args[])
 
 		SDL_Delay(10);
 	}
-
+	SDL_Quit();
 	return 0;
 }
 
