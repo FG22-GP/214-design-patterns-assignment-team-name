@@ -152,10 +152,13 @@ public:
 	void HandleClick(float posX, float posY) {
 		for (auto item : items)
 		{
-			item->HandleClick(
-				posX / (float)Constants::SCREEN_WIDTH, 
+			if (item->HandleClick(
+				posX / (float)Constants::SCREEN_WIDTH,
 				posY / (float)Constants::SCREEN_HEIGHT
-			);
+			))
+			{
+				return;
+			}
 		}
 	};
 
