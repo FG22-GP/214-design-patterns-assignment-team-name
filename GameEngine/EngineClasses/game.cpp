@@ -13,6 +13,7 @@
 #include "../GameObjects/EntityManager.h"
 #include "../Input/Input.h"
 #include "../GameObjects/WinPoint.h"
+#include "../Gui/View.h"
 
 //Delta time
 float LastFrameTime = 0.f;
@@ -20,6 +21,12 @@ float CurrentFrameTime = 0.f;
 float GetDeltaTime()
 {
 	return CurrentFrameTime - LastFrameTime;
+}
+
+void ExitButtonClicked()
+{
+	auto engine = Engine::GetInstance();
+	engine->quit = true;
 }
 
 int main(int argc, char* args[])
@@ -34,6 +41,9 @@ int main(int argc, char* args[])
 	Player& player = Player::getInstance();
 	player.Setup();
 	EntityManager::GetInstance().AddEntity(&player);
+
+	View* view = new View();
+	view->items.push_back(new Button(engine->GetWindow()->renderer, 0.45, 0.95, 0.1, 0.05, "Exit", true, &ExitButtonClicked, new Font(Constants::FONTFILEPATH.c_str())));
 
 	// Enemy enemy = Enemy{Vector2(300, 0)};
 	// enemy.Setup();
@@ -64,12 +74,20 @@ int main(int argc, char* args[])
 
 		player.PlayerMovement(0);
 
-		//Quit input
+		//Event polling, mainly ui input and 
 		while (SDL_PollEvent(&e))
 		{
-			if(e.type == SDL_QUIT)
+			switch (e.type)
 			{
+			case SDL_QUIT:
 				Engine::GetInstance()->quit = true;
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				if (e.button.button == SDL_BUTTON_LEFT)
+				{
+					view->HandleClick((float)e.button.x, (float)e.button.y);
+				}
+				break;
 			}
 		}
 		
@@ -117,6 +135,8 @@ int main(int argc, char* args[])
 		else if(losePoint.GetLoseBoolean())
 			losePoint.Lose();
 		
+		view->Render(engine->GetWindow()->renderer);
+
 		engine->Present();
 #pragma endregion
 
@@ -124,4 +144,3 @@ int main(int argc, char* args[])
 	}
 	return 0;
 }
-

@@ -1519,6 +1519,7 @@
     <ClCompile Include="Input\MoveLeftCommand.cpp" />
     <ClCompile Include="Input\MoveRightCommand.cpp" />
     <ClCompile Include="Input\QuitCommand.cpp" />
+    <ClCompile Include="Gui\View.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\ext\SDL2-2.26.4\lib\x64\SDL2.dll">
@@ -1563,6 +1564,7 @@
     <ClInclude Include="Input\MoveLeftCommand.h" />
     <ClInclude Include="Input\MoveRightCommand.h" />
     <ClInclude Include="Input\QuitCommand.h" />
+    <ClInclude Include="Gui\View.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
