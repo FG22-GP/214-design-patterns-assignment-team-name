@@ -1,6 +1,12 @@
 # Project Description:
 A 2D side scrolling platformer with animations for the player and win-lose conditions. 
 
+[See screenshot 1 here](https://i.imgur.com/lUlvz5S.png)
+
+[See screenshot 2 here](https://i.imgur.com/j3okxCT.png)
+
+[See video here](https://i.imgur.com/CjsuQmj.gifv)
+
 # Design Patterns:
 - Command pattern: In this pattern you encapsulate a function call in a wrapper object (the command). Another commanding class then has a bunch of references to different commands it will run whenever needed. This pattern was implemented for our player inputs. There is a Command class which has a virtual execute function that subclasses will override to do different things. For example, a JumpCommand subclass would override the execute function to do something like player->jump(). The Input class holds a bunch of these input commands and calls their execute function whenever certain buttons are pressed. The reason we chose this pattern is because it makes it very easy to add new functionality or change the key bindings to existing inputs. This system also creates a level of separation between the player class and the input class, meaning the player only holds logic for how to react to inputs, and doesn't need to know how the actual inputs are gotten from the system (a little bit of Bridge pattern). 
 
