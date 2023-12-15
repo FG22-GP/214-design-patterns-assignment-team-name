@@ -1,5 +1,5 @@
 ﻿#include "Entity.h"
-
+#include "../EngineClasses/Engine.h"
 
 Vector2 Entity::GetMiddle()
 {
@@ -33,4 +33,9 @@ void Entity::SetGrounded(bool grounding)
     {
         yForce = 0.f;
     }
+}
+
+void Entity::Draw(Camera camera)
+{
+    Engine::GetInstance()->RenderSprite(sprite, camera.GetRelativeLocation(sprite->position));
 }

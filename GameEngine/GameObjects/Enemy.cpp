@@ -44,10 +44,6 @@ void Enemy::Tick(float deltaTime)
     sprite->position = GetPosition();
 }
 
-void Enemy::Draw()
-{
-    //Engine::GetInstance()->RenderSprite(sprite, RelativeLocation(enemy.sprite->position));
-}
 
 void Enemy::HasCollidedWith(Entity* collidedEntity)
 {
@@ -56,7 +52,7 @@ void Enemy::HasCollidedWith(Entity* collidedEntity)
     float dot = HelperFunctions::DotProduct(HelperFunctions::Normalize(IntersectionLoc - GetMiddle()), Vector2{0, 1});
     if (dot < -0.6f)
     {
-        sprite->Reset();
+        isActive = false;
         EntityManager::GetInstance().RemoveEntityWithId(uniqueId);
     }
 }

@@ -45,9 +45,9 @@ int main(int argc, char* args[])
 	View* view = new View();
 	view->items.push_back(new Button(engine->GetWindow()->renderer, 0.45, 0.95, 0.1, 0.05, "Exit", true, &ExitButtonClicked, new Font(Constants::FONTFILEPATH.c_str())));
 
-	// Enemy enemy = Enemy{Vector2(300, 0)};
-	// enemy.Setup();
-	// EntityManager::GetInstance().AddEntity(&enemy);
+	Enemy enemy = Enemy{Vector2(300, 0)};
+	enemy.Setup();
+	EntityManager::GetInstance().AddEntity(&enemy);
 	
 	//Input setup
 	Input input = Input{};
@@ -97,19 +97,19 @@ int main(int argc, char* args[])
 		if(!winPoint.GetWinBoolean() && !losePoint.GetLoseBoolean())
 		{
 			//Collision
-			//platformHandler.HandleCollision(enemy);
+			platformHandler.HandleCollision(enemy);
 			platformHandler.HandleCollision(player);
 
 			winPoint.WinPointHandle();
 			losePoint.LosePointHandle();
 
 			//Update Collision (Entities)
-			//collisionManager.CollisionUpdate();
+			collisionManager.CollisionUpdate();
 
 			//Update Entities
-			//EntityManager::GetInstance().Update(GetDeltaTime());
+			EntityManager::GetInstance().Update(GetDeltaTime());
 
-			player.Tick(GetDeltaTime());
+			//player.Tick(GetDeltaTime());
 			
 			//Update camera position
 			camera.Position = Vector2{player.GetMiddle().x - Constants::SCREEN_WIDTH / 2, 0};
@@ -122,11 +122,12 @@ int main(int argc, char* args[])
 		{
 			engine->RenderSprite(platform, camera.GetRelativeLocation(platform->position));
 		}
-		engine->RenderSprite(player.sprite, camera.GetRelativeLocation(player.sprite->position));
+		//engine->RenderSprite(player.sprite, camera.GetRelativeLocation(player.sprite->position));
 		engine->RenderSprite(winPoint.winPointSprite, camera.GetRelativeLocation(winPoint.winPointSprite->position));
 		engine->RenderSprite(losePoint.losePointSprite, camera.GetRelativeLocation(losePoint.losePointSprite->position));
 		//engine->RenderSprite(enemy.sprite, camera.GetRelativeLocation(enemy.sprite->position));
 			
+		EntityManager::GetInstance().Draw(camera);
 		
 		//Check if you won
 		if(winPoint.GetWinBoolean())

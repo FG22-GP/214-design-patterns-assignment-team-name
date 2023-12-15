@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Camera.h"
 #include "../EngineClasses/Vector2.h"
 #include "../EngineClasses/Sprite.h"
 
@@ -14,8 +15,10 @@ public:
 
     float yForce;
     int uniqueId;
+    
     bool isGrounded;
-
+    bool isActive = true;
+    
     Entity* nextEntity;
 
     virtual Vector2 GetMiddle();
@@ -28,7 +31,7 @@ public:
     virtual void SetGrounded(bool grounding);
 
     virtual void Tick(float deltaTime) = 0;
-    virtual void Draw() = 0;
+    virtual void Draw(Camera camera);
     virtual void HasCollidedWith(Entity* collidedEntity) = 0;
     
 };

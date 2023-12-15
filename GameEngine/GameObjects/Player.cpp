@@ -57,21 +57,9 @@ void Player::Tick(float deltaTime)
     animator.UpdateSprite();
 }
 
-void Player::Draw()
-{
-}
 
 void Player::HasCollidedWith(Entity* collidedEntity)
 {
     Vector2 IntersectionLoc = HelperFunctions::GetIntersectionPointAABB(sprite->position, sprite->size, collidedEntity->sprite->position, collidedEntity->sprite->size);
-    
-    // Collision under player
-    float dot = HelperFunctions::DotProduct(HelperFunctions::Normalize(IntersectionLoc - GetMiddle()), Vector2{0, 1});
-    if (dot > 0.6f)
-    {
-        Jump();
-        
-    }
-
     
 }

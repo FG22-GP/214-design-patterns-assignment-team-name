@@ -62,17 +62,25 @@ void EntityManager::Update(float deltaTime)
     Entity* stepEntity = firstEntity;
     while (stepEntity != nullptr)
     {
-        stepEntity->Tick(deltaTime);
+        if (stepEntity->isActive)
+        {
+            stepEntity->Tick(deltaTime);
+            
+        }
         stepEntity = stepEntity->nextEntity;
     }
 }
 
-void EntityManager::Draw()
+void EntityManager::Draw(Camera camera)
 {
     Entity* stepEntity = firstEntity;
     while (stepEntity != nullptr)
     {
-        stepEntity->Draw();
+        if (stepEntity->isActive)
+        {
+            stepEntity->Draw(camera);
+            
+        }
         stepEntity = stepEntity->nextEntity;
     }
 }
